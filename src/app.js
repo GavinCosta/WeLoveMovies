@@ -1,5 +1,6 @@
 if (process.env.USER) require("dotenv").config();
 const express = require("express");
+const router = express.Router();
 const app = express();
 const cors = require("cors")
 const theaterRouter = require("./theaters/theaters.router")
@@ -11,6 +12,7 @@ const errorHandler = require('./errors/errorHandler')
 app.use(cors())
 app.use(express.json())
 //set routes - movies, reviews, and theaters
+app.use("/", router)
 app.use("/movies", moviesRouter)
 app.use("/reviews", reviewsRouter)
 app.use("/theaters", theaterRouter)
