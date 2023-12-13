@@ -27,7 +27,7 @@ async function list(req, res, next) {
     // console.log("request.query ------------", req.query.is_showing)
     // determine whether req.query isShowing = true
     // call other function if true (listShowing)
-    console.log(typeof req.query.is_showing)
+    //console.log(typeof req.query.is_showing)
     if (req.query.is_showing === 'true') {
         const data = await moviesService.listShowing()
        return res.json({ data });
