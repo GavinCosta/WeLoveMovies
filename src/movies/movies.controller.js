@@ -1,5 +1,4 @@
 const moviesService = require("./movies.service");
-const knex = require("../db/connection");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
 //create movie exists validator for movies/:movieId where movieId === movie_id
@@ -44,7 +43,24 @@ async function read(req, res, next) {
   res.json({ data: foundMovie });
 }
 
+async function readTheaters(req, res, next) {
+    //console.log("READTHEATERS**************")
+    const {movieId} = req.params
+        //console.log("INSIDE")
+        const data = await moviesService.readTheaters(movieId)
+        // console.log(data, "XXXXXXXXXXXXXXXXXXX")
+        res.json(data)
+}
+
 module.exports = {
   list,
   read: [movieExists, asyncErrorBoundary(read)],
+  readTheaters: [movieExists, asyncErrorBoundary(readTheaters)],
 };
+
+//how do i join information from several tables into 1
+
+//i know i select a table with knex
+//then join tables using shared values
+//then select what i want from tables?
+//does it look like select('theaters.*', 'movies_theaters.is_showing', movieId)

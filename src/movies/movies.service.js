@@ -27,8 +27,28 @@ async function read(movieId) {
         return knex('movies').select('*').where({movie_id: movieId}).first()
 }
 
+//read theaters - get back an obj with theater values where movie_id and is showing = true
+//if is showing === true then join select and group
+//read movie by id, join by movie id then join by theater id
+
+//make new read to get theater where movieId = movie_theater.movie_id 
+async function readTheaters(movieId) {
+    return knex('movies')
+            .join('movies_theaters', 'movies_theaters.movie_id', 'movies.movie_id')
+            .join('theaters', 'movies_theaters.theater_id', 'theaters.theater_id')
+            .select('theaters.*', 'movies_theaters.is_showing', 'movies.movie_id')
+            .where({'movies.movie_id': movieId, 'movies_theaters.is_showing': true})
+            // .groupBy('theaters.theater_id') -- dont need groupBy because through joining we dont have duplicates
+}
+//need to edit to ensure is_showing = true
+
+async function readReviews(movieId) {
+    return knex('movies')
+            .join('reviews', 'movies.movie_id', 'reviews.movie_id')
+}
 
 module.exports = {
+    readTheaters,
     listShowing,
     list,
     read
