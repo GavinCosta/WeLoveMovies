@@ -49,13 +49,41 @@ async function readTheaters(req, res, next) {
         //console.log("INSIDE")
         const data = await moviesService.readTheaters(movieId)
         // console.log(data, "XXXXXXXXXXXXXXXXXXX")
-        res.json(data)
+        res.json({data})
+}
+
+async function readReviews(req,res,next) {
+//get movieId from params
+const {movieId} = req.params
+//set review data into a variable
+const reviews = await moviesService.readReviews(movieId)
+//reformat review data to create a critics object, using aliased keys to populate same named properties
+const formattedReviews = reviews.map((review) => ({
+  review_id: review.review_id,
+  content: review.content,
+  score: review.score,
+  created_at: review.created_at,
+  updated_at: review.updated_at,
+  critic_id: review.critic_id,
+  movie_id: review.movie_id,
+  critic: {
+    critic_id: review.critic_id,
+    preferred_name: review.preferred_name,
+    surname: review.surname,
+    organization_name: review.organization_name,
+    created_at: review.critic_created_at,
+    updated_at: review.critic_updated_at,
+  },
+}));
+//send variable back in res
+  res.json({data: formattedReviews})
 }
 
 module.exports = {
   list,
   read: [movieExists, asyncErrorBoundary(read)],
   readTheaters: [movieExists, asyncErrorBoundary(readTheaters)],
+  readReviews: [movieExists, asyncErrorBoundary(readReviews)]
 };
 
 //how do i join information from several tables into 1

@@ -19,5 +19,13 @@ router.route('/:movieId/theaters')
 //read movies and return a list of reviews for said movie
 //response looks like reviews with movie id and critic info
 router.route('/:movieId/reviews')
+        .get(controller.readReviews)
+        .all(methodNotAllowed)
 
 module.exports = router
+
+//NOTE FOR TOMORROW
+
+//Need to finish this router asap, must figure out whats missing in theaters (believe its actually showing only movies with is_showing: true)
+
+//Also need to write the get method for reviews route - requires all reviews with attached critics for said movieId

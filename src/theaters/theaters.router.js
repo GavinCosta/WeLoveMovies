@@ -10,3 +10,9 @@ router.route("/")
 
 
         module.exports = router
+
+//NOTES
+//All you need to do is return a list of theaters including the movies being shown
+
+//This should likely look like a list function that joins theaters with movies where movies is_shown through the movies_theaters table
+//This means its a double join that will likely include movie, theater, and is shown properties

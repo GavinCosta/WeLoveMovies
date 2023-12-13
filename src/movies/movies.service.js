@@ -43,11 +43,32 @@ async function readTheaters(movieId) {
 //need to edit to ensure is_showing = true
 
 async function readReviews(movieId) {
+    //return a db query that connects reviews critics and movies
     return knex('movies')
+    //get reviews for a given movieId
             .join('reviews', 'movies.movie_id', 'reviews.movie_id')
+            //join critics with critic id
+            .join('critics', 'reviews.critic_id', 'critics.critic_id')
+            //select reviews info and alias critics info
+            .select(   'reviews.review_id',
+            'reviews.content',
+            'reviews.score',
+            'reviews.created_at',
+            'reviews.updated_at',
+            'reviews.critic_id',
+            'reviews.movie_id',
+            'critics.critic_id',
+            'critics.preferred_name',
+            'critics.surname',
+            'critics.organization_name',
+            'critics.created_at as critic_created_at',
+            'critics.updated_at as critic_updated_at')
+            //get reviews for given movieId
+            .where({'reviews.movie_id': movieId })
 }
 
 module.exports = {
+    readReviews,
     readTheaters,
     listShowing,
     list,

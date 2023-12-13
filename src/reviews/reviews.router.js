@@ -16,3 +16,10 @@ router.route("/:reviewId")
             .all(methodNotAllowed)
 
 module.exports = router
+
+//NOTES
+//Included is a skeleton of the processes needed to be fleshed out
+
+//There are 2 tests to pass for put, validator for reviewId exists and updates returning updated review including critic info
+
+//Delete -  uses reviewExists validator and should delete
