@@ -3,12 +3,14 @@ const controller = require("./reviews.controller")
 const methodNotAllowed = require("../errors/methodNotAllowed")
 
 //set up reviews path - appears to only have a reviews/reviewId path (not sure if we should just set as base url in app)
+//May need to erase this route for tests
 router.route("/")
         .get(controller.list)
         .all(methodNotAllowed)
 
 router.route("/:reviewId")
-            //put request (TBD)
+                //may need to remove get
+            .get(controller.read)
             .put(controller.update)
             //delete request (TBD)
             .delete(controller.delete)

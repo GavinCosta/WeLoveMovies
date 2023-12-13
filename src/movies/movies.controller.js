@@ -40,6 +40,7 @@ async function list(req, res, next) {
 
 async function read(req, res, next) {
   const { foundMovie } = res.locals;
+  //console.log(foundMovie)
   res.json({ data: foundMovie });
 }
 

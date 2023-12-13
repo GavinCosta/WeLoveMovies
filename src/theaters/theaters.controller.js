@@ -1,8 +1,7 @@
 const theatersService = require("./theaters.service")
-
+//Need to update function in knex to include movies and map to put movies in an obj
 async function list(req,res,next) {
        const data = await theatersService.list();
-       console.log(data)
         res.json({data});
     }
 
