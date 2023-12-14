@@ -12,7 +12,6 @@ const errorHandler = require('./errors/errorHandler')
 app.use(cors())
 app.use(express.json())
 //set routes - movies, reviews, and theaters
-app.use("/", router)
 app.use("/movies", moviesRouter)
 app.use("/reviews", reviewsRouter)
 app.use("/theaters", theaterRouter)
