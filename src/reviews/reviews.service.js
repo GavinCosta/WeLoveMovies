@@ -33,6 +33,8 @@ async function readReviews(reviewId) {
                         'organization_name': data.organization_name,
                         'preferred_name': data.preferred_name,
                         'surname': data.surname,
+                        "created_at": data.critic_created_at,
+                        "updated_at": data.critic_updated_at
                     },
                     'critic_id': data.critic_id,
                     'movie_id': data.movie_id,

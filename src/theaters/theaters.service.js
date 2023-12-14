@@ -13,6 +13,8 @@ const reduceMovies = reduceProperties('theater_id', {
     image_url: ['movies', null, 'image_url'],   
 })
 
+//write reduce by hand for exercise / use js to write reduce function
+
 async function list() {
     return knex('theaters')
             .join('movies_theaters', 'movies_theaters.theater_id', 'theaters.theater_id')
